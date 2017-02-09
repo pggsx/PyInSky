@@ -1,0 +1,35 @@
+
+chain web
+
+opt allow
+INPUT -p tcp --dport 8080 -J ACCEPT
+FORWARD -p tcp --dport 8080 -J ACCEPT 
+OUTPUT -p tcp --dport 8080 -j ACCEPT
+
+opt deny
+INPUT -p tcp --dport 8080 -J DENY 
+FORWARD -p tcp --dport 8080 -J DENY 
+OUTPUT -p tcp --dport 8080 -j DENY
+
+opt drop
+INPUT -p tcp --dport 8080 -J DROP 
+FORWARD -p tcp --dport 8080 -J DROP 
+OUTPUT -p tcp --dport 8080 -j DROP
+
+chain database 
+
+INPUT -p tcp --dport 3306 -J ACCEPT
+FORWARD -p tcp --dport 3306 -J ACCEPT 
+OUTPUT -p tcp --dport 3306 -j ACCEPT
+
+opt deny
+INPUT -p tcp --dport 3306 -J DENY 
+FORWARD -p tcp --dport 3306 -J DENY 
+OUTPUT -p tcp --dport 3306 -j DENY
+
+opt drop
+INPUT -p tcp --dport 3306 -J DROP 
+FORWARD -p tcp --dport 3306 -J DROP 
+OUTPUT -p tcp --dport 3306 -j DROP
+INPUT -p tcp --dport 3306 -J ALLOW
+
